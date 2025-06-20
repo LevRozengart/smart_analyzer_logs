@@ -1,0 +1,6 @@
+2023-10-05 08:15:23 INFO: Server started on port 8080
+2023-10-05 08:20:45 ERROR: Database connection failed - timeout
+2023-10-05 08:22:10 WARNING: High memory usage (85%)
+2023-10-05 08:25:03 INFO: User admin logged in
+2023-10-05 08:30:17 ERROR: File not found: /var/www/index.html
+2023-10-05 08:35:44 ERROR: Database connection failed - timeout

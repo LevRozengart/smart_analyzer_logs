@@ -1,4 +1,6 @@
 from datetime import datetime
+
+
 class LogInformation:
     def __init__(self, log_line):
         """Example level_with_logging_info - 'ERROR INFO: Server started on port 8080'"""
@@ -23,12 +25,14 @@ class LogParser:
 class LogAnalyzer:
     def __init__(self, iterator_lines: LogParser):
         self.parser = iterator_lines
+
     def get_statistics_by_level(self):
         iterator_of_lines = self.parser.get_iterator()
         statistic_of_levels = {}
         for line in iterator_of_lines:
             statistic_of_levels[line.level] = statistic_of_levels.get(line.level, 0) + 1
         return statistic_of_levels
+
     def give_time_cells(self, time: datetime):
         if time.hour < 6:
             return "night"
@@ -38,16 +42,17 @@ class LogAnalyzer:
             return "afternoon"
         else:
             return "evening"
+
     def get_statistics_by_datetime(self):
         iterator_of_lines = self.parser.get_iterator()
 
         dict_dates = {}
         for line in iterator_of_lines:
             dict_dates.setdefault(line.dt.date(), {
-            "night": 0,  #00:00 - 06:00
-            "morning": 0,  #06:00 - 12:00
-            "afternoon": 0,  #12:00 - 18:00
-            "evening": 0   #18:00 - 24:00
-        })
+                "night": 0,  # 00:00 - 06:00
+                "morning": 0,  # 06:00 - 12:00
+                "afternoon": 0,  # 12:00 - 18:00
+                "evening": 0  # 18:00 - 24:00
+            })
             dict_dates[line.dt.date()][self.give_time_cells(line.dt)] += 1
         return dict_dates

@@ -1,7 +1,7 @@
 from datetime import datetime
 class LogInformation:
     def __init__(self, log_line):
-        """Example level_with_logging_info - 'INFO: Server started on port 8080'"""
+        """Example level_with_logging_info - 'ERROR INFO: Server started on port 8080'"""
         current_list_info = log_line.split()
         current_list_info[2] = current_list_info[2][:-1]
         self.dt = datetime.strptime(current_list_info[0] + " " + current_list_info[1], "%Y-%m-%d %H:%M:%S")
@@ -14,6 +14,7 @@ class LogParser:
         self.file_path = file_path
 
     def get_iterator(self):
+        """yield LogInformation object"""
         with open(self.file_path, "r") as file:
             for line in file:
                 yield LogInformation(line)
@@ -21,11 +22,10 @@ class LogParser:
 
 class LogAnalyzer:
     def __init__(self, iterator_lines: LogParser):
-        self.logline_iter = iterator_lines.get_iterator()
+        self.parser = iterator_lines
     def get_statistics_by_level(self):
+        iterator_of_lines = self.parser.get_iterator()
         statistic_of_levels = {}
-        for line in self.logline_iter:
+        for line in iterator_of_lines:
             statistic_of_levels[line.level] = statistic_of_levels.get(line.level, 0) + 1
         return statistic_of_levels
-
-

@@ -13,7 +13,7 @@ class LogParser:
     def __init__(self, file_path):
         self.file_path = file_path
 
-    def get_iterator_(self):
+    def get_iterator(self):
         with open(self.file_path, "r") as file:
             for line in file:
                 yield LogInformation(line)
@@ -27,4 +27,5 @@ class LogAnalyzer:
         for line in self.logline_iter:
             statistic_of_levels[line.level] = statistic_of_levels.get(line.level, 0) + 1
         return statistic_of_levels
+
 

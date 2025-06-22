@@ -1,4 +1,4 @@
-from tools import *
+from old_code import *
 
 parser = LogParser("test_app.log")
 analyzer = LogAnalyzer(parser)
